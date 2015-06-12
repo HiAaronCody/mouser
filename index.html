@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Mouser</title>
+  
+  <script type="text/javascript" src="paper.js"></script>
+  
+  
+  <script type="text/paperscript" canvas="theCanvas">
+	console.log("hello werld");
+	var path;
+	path = new Path();
+	path.strokeColor = 'black';
+	path.strokeColor.alpha = 0.5;
+	
+	tool.activate();
+	
+	var mouseDownTimeStamp = 0;
+
+	function onMouseUp(event) {
+		var circle = new Path.Circle(event.point, (event.event.timeStamp - mouseDownTimeStamp)/20);
+		
+		if(event.count % 2){
+			circle.fillColor = 'black';
+			circle.strokeColor = 'white';
+			circle.strokeColor.alpha = 0.6;
+		} else {
+			circle.fillColor = 'white';
+			circle.strokeColor = 'black';
+			circle.strokeColor.alpha = 0.4;
+		}
+		
+		circle.fillColor.alpha = 0.2;
+	}
+	function onMouseDrag(event) {
+		var circle = new Path.Circle(event.point, 5);
+		
+		if(event.count % 2){
+			circle.fillColor = 'black';
+			circle.strokeColor = 'white';
+			circle.strokeColor.alpha = 0.6;
+		} else {
+			circle.fillColor = 'white';
+			circle.strokeColor = 'black';
+			circle.strokeColor.alpha = 0.4;
+		}
+		
+		circle.fillColor.alpha = 0.2;
+	}
+
+	function onMouseDown(event){
+		mouseDownTimeStamp = event.event.timeStamp;
+	}
+	
+	function onMouseMove(event) {
+		path.add(event.point);
+	}
+	
+  </script>
+  
+  
+</head>
+<body>
+	<canvas id="theCanvas" resize></canvas>
+</body>
+</html>
